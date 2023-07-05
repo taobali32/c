@@ -6,9 +6,7 @@
 #define CLESSON_SERVICE_H
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include <errno.h>
-
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -16,12 +14,14 @@
 #include <arpa/inet.h>
 #include <sys/epoll.h>
 #include <signal.h>
-#include "connection.h"
 #include "reactor.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
+#include "connection.h"
+#include <string.h>
 
 typedef struct Service{
 
@@ -32,6 +32,11 @@ typedef struct Service{
     int thread_num;
     int ix;
     int epfd;
+
+    //  放在 reactor里面
+//    struct connection *clients;
+//    struct connection *clientsBuffer;
+
     int run_flag;
     reactor *cell;
     void (*InitSocket)(void);
@@ -40,7 +45,7 @@ typedef struct Service{
     void (*Run)(void);
     void (*Stop)(void);
 
-    void (*onRequest)(connection *client);
+//    void (*onRequest)(connection *client);
 
 } Service;
 
@@ -51,7 +56,7 @@ extern void Bind();
 extern void Listen();
 extern void Run();
 extern void Stop();
-extern void onRequest(connection *client);
+//extern void onRequest(connection *client);
 
 #endif //CLESSON_SERVICE_H
 

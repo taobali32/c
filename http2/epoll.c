@@ -5,30 +5,39 @@
 #include "service.h"
 
 
-void eventAdd(Service *service,int event,int sockfd){
+void eventAdd(int epfd,int event,int sockfd)
+{
     struct epoll_event events;
-    events.events = event; //;
-    events.data.fd = sockfd;
+    events.events=event;
+    events.data.fd=sockfd;
 
-    int ret = epoll_ctl(service->epfd,EPOLL_CTL_ADD,sockfd,&events);
+    int ret = epoll_ctl(epfd,EPOLL_CTL_ADD,sockfd,&events);
+    if(ret!=0){
+        perror("epoll_ctl EPOLL_CTL_ADD fail");
+    }
+}
 
-    //  失败
-    if (ret != 0){
-        perror("epoll_ctl fail");
+void eventSet(int epfd,int event,int sockfd)
+{
+    struct epoll_event events;
+    events.events=event;
+    events.data.fd=sockfd;
+
+    int ret = epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&events);
+    if(ret!=0){
+        perror("epoll_ctl EPOLL_CTL_ADD fail");
     }
 }
 
 
-void eventDel(Service *service,int event,int sockfd){
+void eventDel(int epfd,int event,int sockfd)
+{
     struct epoll_event events;
-    events.events = event; //;
-    events.data.fd = sockfd;
+    events.events=event;
+    events.data.fd=sockfd;
 
-    //
-    int ret = epoll_ctl(service->epfd,EPOLL_CTL_DEL,sockfd,&events);
-
-    //  失败
-    if (ret != 0){
-        perror("epoll_ctl fail");
+    int ret = epoll_ctl(epfd,EPOLL_CTL_DEL,sockfd,&events);
+    if(ret!=0){
+        perror("epoll_ctl EPOLL_CTL_DEL fail");
     }
 }

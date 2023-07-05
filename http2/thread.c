@@ -1,11 +1,7 @@
-//
-// Created by macos on 2023/7/4.
-//
-
 #include "service.h"
 #include <pthread.h>
 
-pthread_mutex_t  mutex = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t  mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void createThread(void *(*func)(void *), void *arg) {
     pthread_mutex_lock(&mutex);

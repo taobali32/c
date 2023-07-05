@@ -7,10 +7,11 @@
 
 #include "service.h"
 
-#define MAX_EVENTS 1024
+#define MAX_CONNECTIONS 1024
 
+extern void eventAdd(int epfd,int event,int sockfd);
+extern void eventDel(int epfd,int event,int sockfd);
 
-extern void eventDel(Service *service,int event,int sockfd);
-extern void eventAdd(Service *service,int event,int sockfd);
+extern void eventSet(int epfd,int event,int sockfd);
 
 #endif //C_EPOLL_H
