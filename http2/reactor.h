@@ -16,9 +16,8 @@ typedef struct reactor{
     //  目前连接数量
     int current_client_num;
 
-//
     int max_client_num;
-//    int run_flag;
+    int run_flag;
 
 }reactor;
 extern void *CellEventLoop(void *arg);

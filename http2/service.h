@@ -33,10 +33,6 @@ typedef struct Service{
     int ix;
     int epfd;
 
-    //  放在 reactor里面
-//    struct connection *clients;
-//    struct connection *clientsBuffer;
-
     int run_flag;
     reactor *cell;
     void (*InitSocket)(void);
@@ -45,7 +41,7 @@ typedef struct Service{
     void (*Run)(void);
     void (*Stop)(void);
 
-//    void (*onRequest)(connection *client);
+    void (*onRequest)(connection *client);
 
 } Service;
 
@@ -56,7 +52,7 @@ extern void Bind();
 extern void Listen();
 extern void Run();
 extern void Stop();
-//extern void onRequest(connection *client);
+extern void onRequest(connection *client);
 
 #endif //CLESSON_SERVICE_H
 

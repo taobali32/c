@@ -11,7 +11,6 @@
 
 extern void eventAdd(int epfd,int event,int sockfd);
 extern void eventDel(int epfd,int event,int sockfd);
-
 extern void eventSet(int epfd,int event,int sockfd);
 
 #endif //C_EPOLL_H
